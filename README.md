@@ -14,7 +14,7 @@
         header {
             background-color: #333;
             color: white;
-            padding: 10px;
+            padding: 20px;
             text-align: center;
         }
         .container {
@@ -23,24 +23,27 @@
             padding: 20px;
         }
         .tier-column {
-            width: 200px;
-            margin: 0 10px;
+            width: 250px;
+            margin: 0 20px;
             background-color: #fff;
-            border-radius: 5px;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             padding: 10px;
         }
         .tier-column h2 {
             text-align: center;
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 22px;
+            margin-bottom: 15px;
+            color: #333;
         }
         .player {
-            padding: 10px;
-            margin: 5px 0;
+            padding: 12px;
+            margin: 8px 0;
             background-color: #f1f1f1;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            color: #333;
         }
         .player:hover {
             background-color: #ddd;
@@ -60,25 +63,29 @@
 
 <header>
     <h1>SqTiers - Minecraft PvP Tier List</h1>
+    <p>Welcome to the Minecraft PvP Tier List! Rank your favorite players.</p>
 </header>
 
 <div class="container">
-    <div class="tier-column" id="s-tier">
+    <!-- S Tier -->
+    <div class="tier-column" id="s-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
         <h2>S Tier</h2>
-        <div class="player" draggable="true" ondragstart="drag(event)" id="player1">Player1 - 5000 Elo</div>
-        <div class="player" draggable="true" ondragstart="drag(event)" id="player2">Player2 - 4800 Elo</div>
+        <div class="player" id="player1" draggable="true" ondragstart="drag(event)">Player1 - 5000 Elo</div>
+        <div class="player" id="player2" draggable="true" ondragstart="drag(event)">Player2 - 4800 Elo</div>
     </div>
     
-    <div class="tier-column" id="a-tier">
+    <!-- A Tier -->
+    <div class="tier-column" id="a-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
         <h2>A Tier</h2>
-        <div class="player" draggable="true" ondragstart="drag(event)" id="player3">Player3 - 4600 Elo</div>
-        <div class="player" draggable="true" ondragstart="drag(event)" id="player4">Player4 - 4400 Elo</div>
+        <div class="player" id="player3" draggable="true" ondragstart="drag(event)">Player3 - 4600 Elo</div>
+        <div class="player" id="player4" draggable="true" ondragstart="drag(event)">Player4 - 4400 Elo</div>
     </div>
 
-    <div class="tier-column" id="b-tier">
+    <!-- B Tier -->
+    <div class="tier-column" id="b-tier" ondrop="drop(event)" ondragover="allowDrop(event)">
         <h2>B Tier</h2>
-        <div class="player" draggable="true" ondragstart="drag(event)" id="player5">Player5 - 4200 Elo</div>
-        <div class="player" draggable="true" ondragstart="drag(event)" id="player6">Player6 - 4000 Elo</div>
+        <div class="player" id="player5" draggable="true" ondragstart="drag(event)">Player5 - 4200 Elo</div>
+        <div class="player" id="player6" draggable="true" ondragstart="drag(event)">Player6 - 4000 Elo</div>
     </div>
 </div>
 
@@ -87,27 +94,23 @@
 </div>
 
 <script>
+    // Allow drop functionality
     function allowDrop(ev) {
         ev.preventDefault();
     }
 
+    // Start dragging player
     function drag(ev) {
         ev.dataTransfer.setData("text", ev.target.id);
     }
 
+    // Drop player into new tier
     function drop(ev) {
         ev.preventDefault();
         var data = ev.dataTransfer.getData("text");
         var draggedElement = document.getElementById(data);
         ev.target.appendChild(draggedElement);
     }
-
-    // Enable the drag-and-drop functionality
-    const columns = document.querySelectorAll('.tier-column');
-    columns.forEach(column => {
-        column.addEventListener('dragover', allowDrop);
-        column.addEventListener('drop', drop);
-    });
 </script>
 
 </body>
